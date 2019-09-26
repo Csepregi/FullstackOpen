@@ -2,3 +2,5 @@ part1/node_modules
 part1/node_modules/*
 node_modules/
 /node_modules
+unicafe/node_modules/*
+./unicafe/node_modules/*

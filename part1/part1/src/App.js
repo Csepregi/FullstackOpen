@@ -1,95 +1,133 @@
 import React, { useState } from 'react'
 
+// const Display = ({counter}) => <div>{counter}</div>
 
-// function Header(props){
-//   return (
-//     <div>
-//       <h1>{props.course}</h1>
-//     </div>
-//   )
-// }
-
-// function Part(props){
- 
+// const Button = ({onClick, text}) => {
 //   return(
 //     <div>
-//       <p>{props.part}</p>
+//       <button onClick={onClick}>
+//       {text}
+//       </button>
 //     </div>
 //   )
-// }
+// } 
 
-// function Content(props){
-
-//   return (
-//     <div>
-//       <div>{props.name}</div>
-//     </div>
-//   )
-// }
-
-// function Total(props){
+// const App = (props) => {  
+//   const [counter, setCounter] = useState(0)
+//   const setToValue = (value) => () => setCounter(value)
 //   return(
 //     <div>
-//       <p>{props.total}</p>
+//     <Display counter={counter}/>
+//     <div><Button onClick={setToValue(counter + 1)} text='plus'/></div>
+//     <div><Button onClick={setToValue(0)} text='set to 0'/></div>
 //     </div>
 //   )
 // }
 
-// function App() {
-//   const course = {
-//     name: 'Half Stack application development',
-//     parts: [
-//       {
-//         name: 'Fundamentals of React',
-//         exercises: 10
-//       },
-//       {
-//         name: 'Using props to pass data',
-//         exercises: 7
-//       },
-//       {
-//         name: 'State of a component',
-//         exercises: 14
-//       }
-//     ]
+// const App = (props) => {
+//   const [left, setLeft] = useState(0)
+//   const [right, setRight] = useState(0)
+//   const [allClicks, setAll] = useState([])
+
+//   const handleLeftClick = () => {
+//     setAll(allClicks.concat('L'))
+//     setLeft(left + 1)
 //   }
+
+//   const handleRightClick = () => {
+//     setAll(allClicks.concat('R'))
+//     setRight(right + 1)
+//   }
+
 //   return (
 //     <div>
-//     <Header course={course.name}/>
-//     <Content name={course.parts[0].name}/>
-//     <Part part={course.parts[0].exercises}/>
-//     <Total total={course.parts[0].exercises + course.parts[1].exercises}/>
-
-//   </div>
-//   );
+//       <div>
+//         {left}
+//         <button onClick={handleLeftClick}>left</button>
+//         <button onClick={handleRightClick}>right</button>
+//         {right}
+//         <p>{allClicks.join(' ')}</p>
+//       </div>
+//     </div>
+//   )
 // }
 
-const App = (props) => {  
-  const [counter, setCounter] = useState(0)
-  const setToValue = (value) => () => setCounter(value)
+// const History = (props) => {
+//   if (props.allClicks.length === 0) {
+//     return (
+//       <div>
+//         the app is used by pressing the buttons
+//       </div>
+//     )
+//   }
+
+//   return (
+//     <div>
+//       button press history: {props.allClicks.join(' ')}
+//     </div>
+//   )
+// }
+
+// const Button = ({ onClick, text }) => (
+//   <button onClick={onClick}>
+//     {text}
+//   </button>
+// )
+
+// const App = (props) => {
+//   const [left, setLeft] = useState(0)
+//   const [right, setRight] = useState(0)
+//   const [allClicks, setAll] = useState([])
+
+//   const handleLeftClick = () => {
+//     setAll(allClicks.concat('L'))
+//     setLeft(left + 1)
+//   }
+
+//   const handleRightClick = () => {
+//     setAll(allClicks.concat('R'))
+//     setRight(right + 1)
+//   }
+
+//   return (
+//     <div>
+//       <div>
+//         {left}
+//         <Button onClick={handleLeftClick} text='left' />
+//         <Button onClick={handleRightClick} text='right' />
+//         {right}
+//         <History allClicks={allClicks} />
+//       </div>
+//     </div>
+//   )
+// }
+
+const Display = (props) => <div>{props.value}</div>
+
+const Button = (props) => {
   return(
     <div>
-    <p>{counter}</p>
-    <div><button onClick={setToValue(counter + 1)}>plus</button></div>
+      <button onClick={props.handleClick}>{props.text}</button>
     </div>
   )
 }
 
-// const App = (props) => {
-//   const [ counter, setCounter ] = useState(0)
+const App = (props) => {
+  const [value, setValue] = useState(10)
+  
+  const setToValue = (newValue) => () => {
+    setValue(newValue)
+  }
+  
+  return (
+    <div>
+      <Display value={value}/>
+      <Button handleClick={setToValue(1000)} text='thousand'/>
+      <Button handleClick={setToValue(0)} text='0'/>
+      <Button handleClick={setToValue(value+1)} text='plus'/>
 
-//   const setToValue = (value) => setCounter(value)
+    </div>
+  )
+}
 
-//   return (
-//     <div>
-//       <div>{counter}</div>
-//       <button onClick={() => setToValue(counter + 1)}> 
-//         plus
-//       </button>
-//       <button onClick={() => setToValue(0)}> 
-//         zero
-//       </button>
-//     </div>
-//   )
-// }
 export default App;
