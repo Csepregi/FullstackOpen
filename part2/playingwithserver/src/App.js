@@ -3,9 +3,9 @@ import Note from './components/Note'
 import axios from 'axios'
 
 const App = () => {
-  const [notes, setNotes] = useState([]) 
-  const [newNote, setNewNote] = useState('') 
-  const [showAll, setShowAll] = useState(true)
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState(''); 
+  const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
     axios
