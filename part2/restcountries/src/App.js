@@ -6,6 +6,7 @@ import Filter from './components/Filter'
 function App() {
 
   const [ datas, setCountries] = useState([]);
+ // const [languages, setLanguages] = useState([]);
   const [searchCountry, setSearchCountry] = useState('');
   //const [query, setQuery] = useState(query);
 
@@ -19,14 +20,16 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
     const result = await axios(
-      `https://restcountries.eu/rest/v2/name/${searchCountry}`,
+      `https://restcountries.eu/rest/v2/name/${searchCountry}`
     );
     setCountries(result.data);
+    //setLanguages(result.data.languages);
     console.log(result.data)
     };
     
     fetchData()
   }, [searchCountry]);
+
 
   const displayCountries = searchCountry === ''
   ? datas
@@ -35,17 +38,6 @@ function App() {
   const rows = () => displayCountries.map(data =>
     <li key={data.name}>{data.name}</li>
   )
-
-  // const display = () => {
-  //   if(searchCountry === ''){
-  //     return <div></div>
-  //   } else if(datas.length > 10)  {
-  //     return <div>Precise more</div>
-  //   } else if(datas.lenght > 1) {
-  //     return rows()
-  //   }
-  // }
-
   
 
   const handleSearchInput = (e) => {
