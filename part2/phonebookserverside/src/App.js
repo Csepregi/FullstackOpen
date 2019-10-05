@@ -4,6 +4,7 @@ import Personform from './components/Personform'
 import Persons from './components/Persons'
 import servicePhone from './services/phone'
 
+
 const App = () => {
   const [ persons, setPersons] = useState([]);
 
@@ -91,7 +92,6 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
       <Filter value={searchName} handleSearch={handleSearchInput}/> 
       <Personform onSubmit={addName}
         name={{value: newName, handleName: handleNameInput}}
