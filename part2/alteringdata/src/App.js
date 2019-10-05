@@ -4,6 +4,7 @@ import noteService from './services/notes'
 import Notification from './components/Notification'
 
 
+
 const Footer = () => {
   const footerStyle = {
     color: 'green',
