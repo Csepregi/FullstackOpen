@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import Filter from './components/Filter'
 import Personform from './components/Personform'
 import Persons from './components/Persons'
 import servicePhone from './services/phone'
+import NotificationList from "./components/NotificationList";
 
 
 
 const App = () => {
+
+  const notificationsRef = useRef(null);
+  // these 2 callbacks will hide that the ref is used
+  // and they will make the usage more expressive
+  const showError = useCallback(m => notificationsRef.current.showError(m), [
+    notificationsRef
+  ]);
+  
   const [ persons, setPersons] = useState([]);
 
   const [ newName, setNewName ] = useState('');
@@ -20,6 +29,16 @@ const App = () => {
         setPersons(initialPhones)
       })
   }, [])
+
+  const checkHandleValidationError = error => {
+    if (error.isAxiosError && error.response && error.response.status === 400) {
+      showError(
+        (error.response.data && error.response.data.error) || error.message
+      );
+      return true;
+    }
+    return false;
+  };
 
   const addName = (event) => {
     event.preventDefault()
@@ -42,7 +61,12 @@ const App = () => {
             setNewName('')
             setNewNumber('')
         })
-        }  
+          .catch(error => {
+            if (!checkHandleValidationError(error)) {
+              showError(`Failed to add ${nameObject.name}. ${error}`);
+            }
+        })
+      };  
 
         const checkUpdateNumber = () => {
           const p = persons.find(p => p.name === newName);
@@ -92,6 +116,7 @@ const App = () => {
 
   return (
     <div>
+      <NotificationList ref={notificationsRef} />
       <h2>Phonebook</h2>
       <Filter value={searchName} handleSearch={handleSearchInput}/> 
       <Personform onSubmit={addName}
