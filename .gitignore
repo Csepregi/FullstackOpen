@@ -7,3 +7,6 @@
 ./part2/playingwithserver/node_modules/
 ./part4/blog/node_modules
 **/node_modules
+./part4/blog/.env
+*/.env
+**/.env

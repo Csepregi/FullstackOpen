@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Snowboard",
-    "author": "Tyson Mcfly",
-    "url": "dolomiti.superski.it",
-    "likes": 10
+    "title": "Surf",
+    "author": "Steve Wonder",
+    "url": "portugal.surf.pr",
+    "likes": 14
 }
